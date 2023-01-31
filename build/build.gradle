@@ -9,7 +9,6 @@ task initScript() {
                 throw new TaskExecutionException(it, new Exception("You need a valid Oxygen Scripting license key."))
             } else {
                 new File("${projectDir}/extracted/oxygen/scriptinglicensekey.txt").write(key.replaceAll("  ", "\n"))
-                println "exists: " + new File("${projectDir}/extracted/oxygen/scriptinglicensekey.txt").text
             }
         }
     }
