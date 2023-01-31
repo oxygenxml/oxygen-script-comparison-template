@@ -1,0 +1,62 @@
+name: Run Comparison Script
+on:
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+    inputs:
+      firstBranch:
+        description: 'First branch name.'
+        default: 'main'
+        required: true
+      secondBranch:
+        description: 'Second branch name.'
+        default: 'main'
+        required: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    steps:
+        - name: Checkout main repo with entire history.
+          uses: actions/checkout@v3.3.0
+          with:
+            fetch-depth: 0
+
+        - name: Checkout first branch.
+          uses: actions/checkout@v3.3.0
+          with:
+            ref: ${{ inputs.firstBranch }}
+            path: ${{ inputs.firstBranch }}
+
+        - name: Checkout second branch.
+          uses: actions/checkout@v3.3.0
+          with:
+            ref: ${{ inputs.secondBranch }}
+            path: ${{ inputs.secondBranch }}
+
+        - name: Find the most recent common ancestor of these 2 branches.
+          run: echo "common_ancestor=$(git merge-base origin/${{ inputs.firstBranch }} origin/${{ inputs.secondBranch }})" >> $GITHUB_OUTPUT
+          shell: bash
+          id: find_common_ancestor
+
+        - name: Checkout the common ancestor in the 'base' directory.
+          uses: actions/checkout@v3.3.0
+          with:
+            ref: ${{ steps.find_common_ancestor.outputs.common_ancestor }}
+            path: base
+          
+        - name: Setup Gradle
+          uses: gradle/gradle-build-action@v2
+
+        - name: Make gradlew executable
+          run: chmod +x ./build/gradlew
+          
+        - name: Build with Gradle
+          env:
+           SCRIPTING_LICENSE_KEY: ${{secrets.SCRIPTING_LICENSE_KEY}}
+          run: |
+            cd build; ./gradlew runComparison -PfirstBranch=${{ inputs.firstBranch }} -PsecondBranch=${{ inputs.secondBranch }} -PinnerBuild=true --info --stacktrace --build-cache
+       
+        - name: Deploy
+          uses: JamesIves/github-pages-deploy-action@v4.4.1
+          with:
+            folder: report
