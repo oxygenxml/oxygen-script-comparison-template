@@ -25,5 +25,5 @@ After the comparison, a report is created that provides details about the change
 The comparison report generated using Oxygen Scripting should be available here:
 https://{userid}.github.io/{reponame}/comparisonReport.html
 
-The comparison report generated from <b>oxygenxml</b> repository is available here:
+The comparison report between <i>main</i> branch of this repository and <i>test-branch</i> is available here:
 https://oxygenxml.github.io/oxygen-script-comparison-template/comparisonReport.html
