@@ -22,6 +22,8 @@ After the comparison, a report is created that provides details about the change
 
 📝 The comparison report will be deployed to <i>gh-pages</i> branch. Make sure the workflow has read/write permissions (Settings &#8594; Actions &#8594; General &#8594; Workflow permissions). Otherwise, you may not be able to deploy your report.
 
+📝 If you want to perform comparisons between branches on another repository, you may want to check [Oxygen Comparison action](https://github.com/marketplace/actions/oxygen-comparison-action) and include it in your workflow.
+
 The comparison report generated using Oxygen Scripting should be available here:
 https://{userid}.github.io/{reponame}/comparisonReport.html
 
