@@ -48,7 +48,7 @@ task runComparison(type: Exec, dependsOn: [initScript]) {
             // Replace file locations from GitHub VM with locations from repository.
             ant.replace(
                     file: '../report/comparisonReport.html',
-                    token: 'file:/home/runner/work/comparison-template/comparison-template/main',
+                    token: 'file:/home/runner/work/oxygen-script-comparison-template/oxygen-script-comparison-template/main',
                     value:  repoMainBranchUrl
             )
             ant.replace(
