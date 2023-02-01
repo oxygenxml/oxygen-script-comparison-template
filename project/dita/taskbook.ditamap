@@ -63,7 +63,6 @@
     </frontmatter>
     <chapter href="topics/installing.dita">
         <topicref href="tasks/installstorage.dita">
-            <topicref href="tasks/unscrewcove.dita"/>
             <topicref href="tasks/insertdrive.dita"/>
             <topicref href="tasks/replacecover.dita"/>
         </topicref>
