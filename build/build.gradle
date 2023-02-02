@@ -31,13 +31,13 @@ task runComparison(type: Exec, dependsOn: [initScript]) {
         commandLine "scripts/compareDirs.sh",
                 firstDir, secondDir, baseDir,
                 "-ed", ".git", // ignore .git directory
-                "-out", "html",
+                "-out", "html/ifcr",
                 "-outfile", "${projectDir}/../report/comparisonReport.html"
     } else {
         commandLine "scripts/compareDirs.sh",
                 firstDir, secondDir,
                 "-ed", ".git", // ignore .git directory
-                "-out", "html",
+                "-out", "html/ifcr",
                 "-outfile", "${projectDir}/../report/comparisonReport.html"
     }
 
